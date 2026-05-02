@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "raftlabs-plugins",
+  "version": "1.0.0",
+  "description": "RaftLabs standard Claude Code toolkit — skills and commands used across all RaftLabs projects",
+  "owner": {
+    "name": "RaftLabs",
+    "email": "dev@raftlabs.com"
+  },
+  "plugins": [
+    {
+      "name": "raftlabs",
+      "description": "Full RaftLabs dev toolkit: /dev, /bug, /release-note, domain skills (backend, database, react, tdd, seo, asana), utility skills (dev-worklog, qa-scenario-matrix, grill-me), and the 4-stage website system (/build, /judge, /feedback, /polish)",
+      "source": "./plugins/raftlabs",
+      "category": "productivity"
+    }
+  ]
+}

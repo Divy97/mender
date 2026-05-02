@@ -1,0 +1,23 @@
+{
+  "name": "raftlabs",
+  "version": "1.0.0",
+  "description": "RaftLabs standard Claude Code toolkit. Bundles workflow skills (/dev, /bug, /release-note), domain skills (backend, database, react, tdd, seo, code-quality, asana), utility skills (dev-worklog, qa-scenario-matrix, grill-me), and the 4-stage website prompt system (/build, /judge, /feedback, /polish).",
+  "author": {
+    "name": "RaftLabs",
+    "email": "dev@raftlabs.com"
+  },
+  "homepage": "https://github.com/Raft-Labs/claude-plugins",
+  "repository": "https://github.com/Raft-Labs/claude-plugins",
+  "mcpServers": {
+    "asana": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@asana/mcp"]
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp"]
+    }
+  }
+}
