@@ -1,6 +1,6 @@
 # RaftLabs Claude Code Plugin
 
-The official RaftLabs toolkit for Claude Code. Install once per machine and get all company skills and slash commands in every project.
+The official RaftLabs toolkit for Claude Code. Install once per machine and get all RaftLabs skills in every project.
 
 ## Install
 
@@ -8,9 +8,9 @@ The official RaftLabs toolkit for Claude Code. Install once per machine and get 
 claude plugin add Raft-Labs/claude-plugins
 ```
 
-That's it. All 17 skills and both MCP servers (Asana + Playwright) are registered automatically.
+All `raftkit-*` skills and both MCP servers (Asana + Playwright) are registered automatically.
 
-**First-time Asana setup:** On first use of any Asana-dependent skill, Claude will prompt you to authenticate via OAuth in your browser. One-time step.
+**First-time Asana setup:** On first use of any Asana-dependent skill, Claude prompts you to authenticate via OAuth in your browser. One-time step.
 
 ## Update
 
@@ -18,51 +18,51 @@ That's it. All 17 skills and both MCP servers (Asana + Playwright) are registere
 claude plugin update raftlabs
 ```
 
-Run this after any merge to `main` to pull the latest skills.
+Run after any merge to `main` to pull the latest skills.
 
 ## Skills
+
+All skills are imported verbatim from the mentor project (`.agents/skills/raftkit-*`) and invoked as slash commands.
 
 ### Workflow
 | Skill | Description |
 |-------|-------------|
-| `/dev` | Full task-driven development cycle — reads task spec, plans, builds with TDD, commits incrementally, creates PR |
-| `/bug` | Universal bug resolution — investigate root cause, analyze negative scenarios, propose fix, optionally implement |
-| `/release-note` | Generate release notes from git history and publish to Asana |
+| `/raftkit-dev` | Task-driven development — reads task spec, plans, builds with TDD, commits incrementally, creates PR |
+| `/raftkit-bug` | Universal bug resolution — investigate root cause, propose fix, optionally implement |
+| `/raftkit-debug-issue` | Targeted debugging workflow for a specific reported issue |
+| `/raftkit-release-note` | Generate release notes from git history and publish to Asana |
+| `/raftkit-review-changes` | Review pending changes on the current branch |
+| `/raftkit-refactor-safely` | Safe, incremental refactoring with verification |
+| `/raftkit-explore-codebase` | Map an unfamiliar codebase before making changes |
+| `/raftkit-verify-story` | Verify a completed story against its acceptance criteria |
 
 ### Domain
 | Skill | Description |
 |-------|-------------|
-| `/backend` | Lambda functions, Hono handlers, Express routes, Zod validation |
-| `/database` | Drizzle ORM schemas, PostgreSQL migrations, indexes, relations |
-| `/react` | React components, hooks, Next.js pages, Server/Client Components |
-| `/tdd` | Enforces Red-Green-Refactor cycle, 80% minimum coverage |
-| `/seo` | Metadata, OpenGraph, JSON-LD, Core Web Vitals, Next.js Metadata API |
-| `/code-quality` | Refactoring, function decomposition, complexity reduction |
-| `/asana` | Asana project management — must invoke before any Asana MCP operations |
-
-### Utility
-| Skill | Description |
-|-------|-------------|
-| `/dev-worklog` | Grounded developer status updates from local repo activity |
-| `/qa-scenario-matrix` | Generate comprehensive QA scenarios for any feature |
-| `/grill-me` | Relentless questioning about a plan until reaching shared understanding |
-
-### 4-Stage Website System
-Run these in sequence for any frontend/website work:
-
-| Skill | Stage | Description |
-|-------|-------|-------------|
-| `/build` | 1 | Generate complete initial implementation from a brief |
-| `/judge` | 2 | Structured critique — design, UX, copy, accessibility, code quality |
-| `/feedback` | 3 | Incorporate stakeholder feedback into a concrete plan and execute |
-| `/polish` | 4 | Micro-interactions, animations, accessibility, production readiness |
+| `/raftkit-backend` | Lambda, Hono, Express, Zod patterns |
+| `/raftkit-database` | Drizzle ORM, PostgreSQL migrations, indexes |
+| `/raftkit-react` | React components, hooks, Next.js patterns |
+| `/raftkit-mobile-dev` | Expo / React Native development workflow |
+| `/raftkit-tdd` | Red-Green-Refactor cycle enforcement |
+| `/raftkit-seo` | Metadata, OpenGraph, JSON-LD, Core Web Vitals |
+| `/raftkit-code-quality` | Refactoring, function decomposition, complexity reduction |
+| `/raftkit-asana` | Asana project management — invoke before any Asana MCP operation |
 
 ## Bundled MCP Servers
 
 | MCP | Purpose |
 |-----|---------|
-| `@asana/mcp` | Asana task management — OAuth auth on first use |
+| `@asana/mcp` | Asana task management — OAuth on first use |
 | `@playwright/mcp` | Browser automation for UI verification |
+
+## Roadmap
+
+This is v1 — the consolidation step. Coming next:
+
+- Pull additional skills from other `raftkit-*` source repos as they're identified
+- Migrate Git hooks / commit conventions / branch protection from raftstack into this plugin
+- Add the 4-stage Website Prompt System (`/build`, `/judge`, `/feedback`, `/polish`) once finalised
+- Versioning convention TBD
 
 ## Adding a New Skill
 

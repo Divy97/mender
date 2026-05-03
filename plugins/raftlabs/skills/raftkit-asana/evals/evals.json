@@ -1,0 +1,34 @@
+[
+  {
+    "id": "create-task-rich-text",
+    "prompt": "Create a new task in the Mentor v1 project called 'Implement user notifications' with a rich text description that includes a heading, bullet list of requirements, and a link to task 1213506759986048. Assign it to me and set it due next Friday.",
+    "tests": [
+      "Uses asana_create_task with project_id and html_notes (single-step creation)",
+      "Uses html_notes with <body> wrapper for rich text, written as compact single-line HTML",
+      "Includes <a data-asana-gid=\"1213506759986048\"/> for task link",
+      "Sets assignee to \"me\"",
+      "Sets due_on in YYYY-MM-DD format"
+    ]
+  },
+  {
+    "id": "search-and-update",
+    "prompt": "Find all incomplete tasks in the Mentor v1 project assigned to me and mark the oldest one as complete.",
+    "tests": [
+      "Uses asana_search_tasks or asana_get_tasks with project filter",
+      "Includes opt_fields for completed,assignee,due_on,created_at",
+      "Filters for incomplete tasks assigned to current user",
+      "Calls asana_update_task with completed: true on the oldest task",
+      "Does not modify other tasks"
+    ]
+  },
+  {
+    "id": "status-report",
+    "prompt": "Search for tasks related to 'authentication' and give me a status update on what's done and what's remaining.",
+    "tests": [
+      "Uses asana_typeahead_search or asana_search_tasks to find matching tasks",
+      "Retrieves task details with opt_fields for completed status",
+      "Groups results into done vs remaining",
+      "Provides a summary without just dumping raw data"
+    ]
+  }
+]
