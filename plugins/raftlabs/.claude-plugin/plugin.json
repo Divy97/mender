@@ -1,6 +1,6 @@
 {
   "name": "raftlabs",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "RaftLabs standard Claude Code toolkit. Bundles the raftkit-* skill set imported from the mentor project: dev workflow, bug triage, release notes, code review, refactoring, exploration, verification, plus domain skills for backend, database, react, mobile-dev, tdd, seo, code-quality, debug-issue, and asana.",
   "author": {
     "name": "RaftLabs",

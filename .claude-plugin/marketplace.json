@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "raftlabs-plugins",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "RaftLabs standard Claude Code toolkit — the raftkit-* skill set imported from the mentor project",
   "owner": {
     "name": "RaftLabs",
