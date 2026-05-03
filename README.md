@@ -1,52 +1,69 @@
 # RaftLabs Claude Code Plugin
 
-The official RaftLabs toolkit for Claude Code. Install once per machine and get all RaftLabs skills in every project.
+The RaftLabs toolkit for Claude Code. Install once per machine and get all RaftLabs skills in every project.
+
+> **Status:** v1 lives at `Divy97/mender` while we consolidate. It will move to `Raft-Labs/claude-plugins` once the full skill set is migrated.
 
 ## Install
 
-```bash
-claude plugin add Raft-Labs/claude-plugins
+Inside Claude Code, run:
+
+```
+/plugin marketplace add Divy97/mender
+/plugin install raftlabs@raftlabs-plugins
+/reload-plugins
 ```
 
-All `raftkit-*` skills and both MCP servers (Asana + Playwright) are registered automatically.
+All 16 `raftkit-*` skills and both MCP servers (Asana + Playwright) are registered automatically. Verify with `/help` — you should see entries like `/raftlabs:raftkit-dev`.
 
 **First-time Asana setup:** On first use of any Asana-dependent skill, Claude prompts you to authenticate via OAuth in your browser. One-time step.
 
 ## Update
 
-```bash
-claude plugin update raftlabs
+After a new commit lands on `main`, pull it in with:
+
+```
+/plugin update raftlabs
+/reload-plugins
 ```
 
-Run after any merge to `main` to pull the latest skills.
+## Invoking skills
+
+Skills are namespaced under the plugin. The full form is:
+
+```
+/raftlabs:<skill-name>
+```
+
+For example: `/raftlabs:raftkit-dev`, `/raftlabs:raftkit-bug`, `/raftlabs:raftkit-asana`.
 
 ## Skills
 
-All skills are imported verbatim from the mentor project (`.agents/skills/raftkit-*`) and invoked as slash commands.
+All skills are imported verbatim from the mentor project (`.agents/skills/raftkit-*`).
 
 ### Workflow
 | Skill | Description |
 |-------|-------------|
-| `/raftkit-dev` | Task-driven development — reads task spec, plans, builds with TDD, commits incrementally, creates PR |
-| `/raftkit-bug` | Universal bug resolution — investigate root cause, propose fix, optionally implement |
-| `/raftkit-debug-issue` | Targeted debugging workflow for a specific reported issue |
-| `/raftkit-release-note` | Generate release notes from git history and publish to Asana |
-| `/raftkit-review-changes` | Review pending changes on the current branch |
-| `/raftkit-refactor-safely` | Safe, incremental refactoring with verification |
-| `/raftkit-explore-codebase` | Map an unfamiliar codebase before making changes |
-| `/raftkit-verify-story` | Verify a completed story against its acceptance criteria |
+| `/raftlabs:raftkit-dev` | Task-driven development — reads task spec, plans, builds with TDD, commits incrementally, creates PR |
+| `/raftlabs:raftkit-bug` | Universal bug resolution — investigate root cause, propose fix, optionally implement |
+| `/raftlabs:raftkit-debug-issue` | Targeted debugging workflow for a specific reported issue |
+| `/raftlabs:raftkit-release-note` | Generate release notes from git history and publish to Asana |
+| `/raftlabs:raftkit-review-changes` | Review pending changes on the current branch |
+| `/raftlabs:raftkit-refactor-safely` | Safe, incremental refactoring with verification |
+| `/raftlabs:raftkit-explore-codebase` | Map an unfamiliar codebase before making changes |
+| `/raftlabs:raftkit-verify-story` | Verify a completed story against its acceptance criteria |
 
 ### Domain
 | Skill | Description |
 |-------|-------------|
-| `/raftkit-backend` | Lambda, Hono, Express, Zod patterns |
-| `/raftkit-database` | Drizzle ORM, PostgreSQL migrations, indexes |
-| `/raftkit-react` | React components, hooks, Next.js patterns |
-| `/raftkit-mobile-dev` | Expo / React Native development workflow |
-| `/raftkit-tdd` | Red-Green-Refactor cycle enforcement |
-| `/raftkit-seo` | Metadata, OpenGraph, JSON-LD, Core Web Vitals |
-| `/raftkit-code-quality` | Refactoring, function decomposition, complexity reduction |
-| `/raftkit-asana` | Asana project management — invoke before any Asana MCP operation |
+| `/raftlabs:raftkit-backend` | Lambda, Hono, Express, Zod patterns |
+| `/raftlabs:raftkit-database` | Drizzle ORM, PostgreSQL migrations, indexes |
+| `/raftlabs:raftkit-react` | React components, hooks, Next.js patterns |
+| `/raftlabs:raftkit-mobile-dev` | Expo / React Native development workflow |
+| `/raftlabs:raftkit-tdd` | Red-Green-Refactor cycle enforcement |
+| `/raftlabs:raftkit-seo` | Metadata, OpenGraph, JSON-LD, Core Web Vitals |
+| `/raftlabs:raftkit-code-quality` | Refactoring, function decomposition, complexity reduction |
+| `/raftlabs:raftkit-asana` | Asana project management — invoke before any Asana MCP operation |
 
 ## Bundled MCP Servers
 
@@ -83,7 +100,7 @@ description: >-
 
 3. Bump `version` in both `plugins/raftlabs/.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`
 4. Raise a PR — Divy reviews and merges
-5. Team runs `claude plugin update raftlabs`
+5. Team runs `/plugin update raftlabs` then `/reload-plugins` inside Claude Code
 
 ## Contributing
 
@@ -94,21 +111,25 @@ description: >-
 
 ## Local Testing
 
-To test plugin changes before pushing to GitHub:
+To test plugin changes from a local checkout before pushing:
 
-```bash
-# 1. Init git if not already done
-cd /path/to/mender
-git init && git add . && git commit -m "changes"
+1. Commit your changes locally (the marketplace loader needs them on a branch):
 
-# 2. Add to ~/.claude/settings.json under extraKnownMarketplaces:
-# "raftlabs-local": {
-#   "source": { "source": "git", "url": "file:///path/to/mender" }
-# }
+   ```bash
+   git add . && git commit -m "wip"
+   ```
 
-# 3. Install
-claude plugin add raftlabs --from raftlabs-local
+2. Inside Claude Code, register the local repo as a marketplace:
 
-# 4. After further changes, reinstall
-claude plugin remove raftlabs && claude plugin add raftlabs --from raftlabs-local
-```
+   ```
+   /plugin marketplace add file:///Users/you/path/to/mender
+   /plugin install raftlabs@raftlabs-plugins
+   /reload-plugins
+   ```
+
+3. After further changes, commit and reload:
+
+   ```
+   /plugin update raftlabs
+   /reload-plugins
+   ```
